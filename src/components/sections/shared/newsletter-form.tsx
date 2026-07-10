@@ -39,7 +39,7 @@ export function NewsletterForm({ className }: { className?: string }) {
         {pending ? "Signing up…" : "Sign up"}
       </Button>
       {state.status === "error" ? (
-        <p id="newsletter-error" role="alert" className="text-sm text-red-300 sm:hidden">
+        <p id="newsletter-error" role="alert" className="w-full text-sm text-red-300">
           {state.message}
         </p>
       ) : null}

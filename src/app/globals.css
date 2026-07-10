@@ -58,7 +58,7 @@
   /* Anton's ink spans a full 1.0em (0.87 ascent + 0.13 descent), so any
      line-height at or below 1.0 makes descenders collide with the next line.
      These two tokens stay above that floor — use them for all display type. */
-  --leading-display: 1.06; /* hero-scale headings */
+  --leading-display: 1.14; /* hero-scale headings */
   --leading-heading: 1.14; /* section headings, usually 2-3 lines */
 
   --radius-sm: var(--radius-sm);

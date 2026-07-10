@@ -1,7 +1,5 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { StatTile } from "@/components/ui/stat-tile";
-import { impactStats } from "@/content/stats";
 import { homeHeroPhoto } from "@/content/gallery";
 
 export function Hero() {
@@ -45,12 +43,6 @@ export function Hero() {
           >
             Meet Our Startups
           </Button>
-        </div>
-
-        <div className="mt-16 grid max-w-xl grid-cols-3 gap-6 border-t border-cream-50/10 pt-10">
-          {impactStats.map((stat) => (
-            <StatTile key={stat.id} stat={stat} />
-          ))}
         </div>
       </div>
     </section>

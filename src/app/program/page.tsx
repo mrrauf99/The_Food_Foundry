@@ -26,7 +26,7 @@ export default function ProgramPage() {
       <DemoDayGallery />
       <FundingStructure />
       <ProgramDetails />
-      <FaqSection title="Questions about the program" items={programFaq} className="bg-cream-50" />
+      <FaqSection title="Questions about the program" items={programFaq} className="bg-cream-100" />
       <CtaBand
         title="Ready to bring your idea to the table?"
         description="Tell us about your company and we'll follow up with details on the next cohort's application window."

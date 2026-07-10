@@ -11,16 +11,30 @@ interface VideoThumbnailProps {
   alt: string;
   sizes: string;
   className?: string;
+  autoPlay?: boolean;
+  aspectClassName?: string;
 }
 
-export function VideoThumbnail({ videoId, src, alt, sizes, className }: VideoThumbnailProps) {
-  const [playing, setPlaying] = useState(false);
+export function VideoThumbnail({
+  videoId,
+  src,
+  alt,
+  sizes,
+  className,
+  autoPlay = false,
+  aspectClassName = "aspect-4/3",
+}: VideoThumbnailProps) {
+  const [playing, setPlaying] = useState(autoPlay);
+  const [startedByUser, setStartedByUser] = useState(false);
 
   if (playing) {
+    const muted = autoPlay && !startedByUser;
     return (
-      <div className={cn("relative aspect-4/3 overflow-hidden rounded-lg bg-ink-950", className)}>
+      <div
+        className={cn("relative overflow-hidden rounded-lg bg-ink-950", aspectClassName, className)}
+      >
         <iframe
-          src={`https://www.youtube.com/embed/${videoId}?autoplay=1`}
+          src={`https://www.youtube.com/embed/${videoId}?autoplay=1${muted ? "&mute=1" : ""}`}
           title={alt}
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
@@ -33,10 +47,14 @@ export function VideoThumbnail({ videoId, src, alt, sizes, className }: VideoThu
   return (
     <button
       type="button"
-      onClick={() => setPlaying(true)}
+      onClick={() => {
+        setStartedByUser(true);
+        setPlaying(true);
+      }}
       aria-label={`Play video: ${alt}`}
       className={cn(
-        "group relative aspect-4/3 w-full cursor-pointer overflow-hidden rounded-lg",
+        "group relative w-full cursor-pointer overflow-hidden rounded-lg",
+        aspectClassName,
         className,
       )}
     >
