@@ -4,6 +4,7 @@ import { NuqsAdapter } from "nuqs/adapters/next/app";
 import "./globals.css";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
+import { RouteProgress } from "@/components/layout/route-progress";
 import { JsonLd } from "@/components/seo/json-ld";
 import { organizationSchema } from "@/lib/seo/structured-data";
 import { site } from "@/content/site";
@@ -52,6 +53,7 @@ export default function RootLayout({
           Skip to content
         </a>
         <NuqsAdapter>
+          <RouteProgress />
           <Navbar />
           <main id="main-content" className="flex-1">
             {children}
