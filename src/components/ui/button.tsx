@@ -4,7 +4,9 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-semibold tracking-wide transition-colors duration-150 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50",
+  // The press scale is the most-touched interaction on the site, so it gets the
+  // fast token — anything slower than ~150ms stops feeling like a button.
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-semibold tracking-wide transition-[color,background-color,border-color,transform] duration-[var(--duration-fast)] ease-out-soft active:scale-[0.97] motion-reduce:active:scale-100 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50",
   {
     variants: {
       variant: {

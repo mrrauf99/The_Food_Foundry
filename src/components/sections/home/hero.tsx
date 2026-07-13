@@ -18,20 +18,35 @@ export function Hero() {
       </div>
 
       <div className="relative mx-auto flex max-w-6xl flex-col px-6 pt-24 pb-14 md:pt-32 md:pb-16">
-        <p className="text-sm font-semibold uppercase tracking-[0.2em] text-teal-300">
+        {/* Above-the-fold, so this staggers via CSS rather than Framer Motion —
+            no waiting on hydration, and nothing renders at opacity:0 if JS fails.
+            Reduced motion zeroes both duration and delay in globals.css. */}
+        <p
+          className="animate-fade-up text-sm font-semibold uppercase tracking-[0.2em] text-teal-300"
+          style={{ animationDelay: "60ms" }}
+        >
           Chicago · Founder Community &amp; Accelerator
         </p>
-        <h1 className="mt-6 max-w-4xl font-display text-[clamp(2.75rem,6vw,5.5rem)] leading-display tracking-tight text-balance">
+        <h1
+          className="animate-fade-up mt-6 max-w-4xl font-display text-[clamp(2.75rem,6vw,5.5rem)] leading-display tracking-tight text-balance"
+          style={{ animationDelay: "140ms" }}
+        >
           For founders disrupting food{" "}
           <span className="text-teal-400">and foodservice.</span>
         </h1>
-        <p className="mt-6 max-w-2xl text-lg leading-relaxed text-cream-100/80 md:text-xl">
+        <p
+          className="animate-fade-up mt-6 max-w-2xl text-lg leading-relaxed text-cream-100/80 md:text-xl"
+          style={{ animationDelay: "220ms" }}
+        >
           Food Foundry is a founder community and accelerator program built with Relish Works
           and Gordon Food Service — advancing early-stage businesses through strategic
           investment, network access, and hands-on guidance.
         </p>
 
-        <div className="mt-10 flex flex-wrap gap-4">
+        <div
+          className="animate-fade-up mt-10 flex flex-wrap gap-4"
+          style={{ animationDelay: "300ms" }}
+        >
           <Button href="/contact" variant="secondary" size="lg">
             Apply Now
           </Button>

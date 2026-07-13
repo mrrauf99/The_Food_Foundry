@@ -38,7 +38,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${anton.variable} ${inter.variable} h-full`}>
+    <html
+      lang="en"
+      className={`${anton.variable} ${inter.variable} h-full`}
+      // Browser extensions (QuillBot, Grammarly, password managers) inject
+      // attributes onto <html> before React hydrates, which reads as a mismatch.
+      // This suppresses the diff for this element's own attributes only —
+      // real mismatches anywhere below it still surface.
+      suppressHydrationWarning
+    >
       <head>
         {/* Scroll-reveal sections render at opacity:0 until Framer Motion hydrates. */}
         <noscript>

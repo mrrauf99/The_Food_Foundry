@@ -19,8 +19,9 @@ export function StartupCard({
 
   const content = (
     <Card
+      interactive={Boolean(startup.websiteUrl)}
       className={cn(
-        "group flex h-full flex-col p-6 transition-shadow hover:shadow-lifted",
+        "group flex h-full flex-col p-6",
         dark && "border-cream-50/10 bg-ink-900 text-cream-50",
       )}
     >
