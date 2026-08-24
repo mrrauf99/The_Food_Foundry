@@ -33,7 +33,7 @@ export const AccordionTrigger = React.forwardRef<
       {...props}
     >
       {children}
-      <ChevronDown className="size-5 shrink-0 text-teal-500 transition-transform duration-200 group-data-[state=open]:rotate-180" />
+      <ChevronDown className="size-5 shrink-0 text-teal-500 transition-transform duration-[var(--duration-fast)] ease-out-soft group-data-[state=open]:rotate-180" />
     </AccordionPrimitive.Trigger>
   </AccordionPrimitive.Header>
 ));
@@ -45,7 +45,7 @@ export const AccordionContent = React.forwardRef<
 >(({ className, children, ...props }, ref) => (
   <AccordionPrimitive.Content
     ref={ref}
-    className="overflow-hidden data-[state=closed]:animate-[accordion-up_0.2s_ease-out] data-[state=open]:animate-[accordion-down_0.2s_ease-out]"
+    className="overflow-hidden data-[state=closed]:animate-[accordion-up_var(--duration-base)_var(--ease-out-soft)] data-[state=open]:animate-[accordion-down_var(--duration-base)_var(--ease-out-soft)]"
     {...props}
   >
     <div className={cn("pb-5 text-ink-700 leading-relaxed", className)}>{children}</div>

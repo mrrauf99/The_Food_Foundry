@@ -1,4 +1,5 @@
 import { StartupCard } from "@/components/sections/startups/startup-card";
+import { StaggerGroup, StaggerItem } from "@/components/motion/stagger";
 import { cohorts } from "@/content/cohorts";
 import type { Startup } from "@/types/startup";
 
@@ -19,11 +20,13 @@ export function StartupGrid({
 
   if (!groupByCohort) {
     return (
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <StaggerGroup className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {startups.map((startup) => (
-          <StartupCard key={startup.slug} startup={startup} />
+          <StaggerItem key={startup.slug}>
+            <StartupCard startup={startup} />
+          </StaggerItem>
         ))}
-      </div>
+      </StaggerGroup>
     );
   }
 
@@ -39,11 +42,13 @@ export function StartupGrid({
               {cohort.year ? <span className="text-ink-500"> — {cohort.year}</span> : null}
             </h2>
             <p className="mb-6 max-w-2xl text-sm text-ink-700">{cohort.description}</p>
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <StaggerGroup className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {inCohort.map((startup) => (
-                <StartupCard key={startup.slug} startup={startup} />
+                <StaggerItem key={startup.slug}>
+                  <StartupCard startup={startup} />
+                </StaggerItem>
               ))}
-            </div>
+            </StaggerGroup>
           </div>
         );
       })}

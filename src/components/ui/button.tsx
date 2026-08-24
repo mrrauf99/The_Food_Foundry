@@ -5,8 +5,9 @@ import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
   // The press scale is the most-touched interaction on the site, so it gets the
-  // fast token — anything slower than ~150ms stops feeling like a button.
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-semibold tracking-wide transition-[color,background-color,border-color,transform] duration-[var(--duration-fast)] ease-out-soft active:scale-[0.97] motion-reduce:active:scale-100 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50",
+  // fast token — anything slower than ~150ms stops feeling like a button. The
+  // hover lift mirrors Card's affordance so buttons don't feel inert next to it.
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-semibold tracking-wide transition-[color,background-color,border-color,transform] duration-[var(--duration-fast)] ease-out-soft hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.97] motion-reduce:hover:translate-y-0 motion-reduce:active:scale-100 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50",
   {
     variants: {
       variant: {

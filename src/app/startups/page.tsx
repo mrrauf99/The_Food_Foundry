@@ -27,6 +27,8 @@ export default async function StartupsPage({
 
   return (
     <>
+      {/* Above-the-fold, like the home Hero — CSS stagger rather than Framer Motion
+          so there's no wait on hydration and nothing sits at opacity:0 if JS fails. */}
       <Section className="bg-teal-500 text-ink-950" containerClassName="text-center">
         <SectionHeading
           as="h1"
@@ -34,7 +36,7 @@ export default async function StartupsPage({
           eyebrow="Portfolio"
           title="Meet Our Startups"
           description="Food Foundry is dedicated to amplifying impact by supporting and empowering founders to thrive in the dynamic landscape of the food and foodservice industry."
-          className="mx-auto [&_h2]:text-ink-950 [&_p]:text-ink-950/80"
+          className="animate-fade-up mx-auto [&_h2]:text-ink-950 [&_p]:text-ink-950/80"
         />
       </Section>
 

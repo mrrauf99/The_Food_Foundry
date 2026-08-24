@@ -1,3 +1,4 @@
+import { StaggerGroup, StaggerItem } from "@/components/motion/stagger";
 import { Section, SectionHeading } from "@/components/ui/section";
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
 import { JsonLd } from "@/components/seo/json-ld";
@@ -19,12 +20,16 @@ export function FaqSection({
     <Section className={className}>
       <SectionHeading align="center" eyebrow={eyebrow} title={title} className="mx-auto mb-10" />
       <Accordion type="single" collapsible className="mx-auto max-w-3xl">
-        {items.map((item) => (
-          <AccordionItem key={item.id} value={item.id}>
-            <AccordionTrigger>{item.question}</AccordionTrigger>
-            <AccordionContent>{item.answer}</AccordionContent>
-          </AccordionItem>
-        ))}
+        <StaggerGroup>
+          {items.map((item) => (
+            <StaggerItem key={item.id}>
+              <AccordionItem value={item.id}>
+                <AccordionTrigger>{item.question}</AccordionTrigger>
+                <AccordionContent>{item.answer}</AccordionContent>
+              </AccordionItem>
+            </StaggerItem>
+          ))}
+        </StaggerGroup>
       </Accordion>
       <JsonLd data={faqPageSchema(items)} />
     </Section>

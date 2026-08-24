@@ -2,9 +2,11 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { ChevronLeft, ChevronRight, Play } from "lucide-react";
 import { Section, SectionHeading } from "@/components/ui/section";
 import { VideoThumbnail } from "@/components/ui/video-thumbnail";
+import { duration, easeOutSoft } from "@/lib/motion";
 import { cn } from "@/lib/utils";
 import { demoDayPhotos } from "@/content/gallery";
 
@@ -15,6 +17,7 @@ export function DemoDayGallery() {
   const [index, setIndex] = useState(0);
   const photo = demoDayPhotos[index];
   const total = demoDayPhotos.length;
+  const reduced = useReducedMotion();
 
   const goTo = (direction: 1 | -1) => {
     setIndex((current) => (current + direction + total) % total);
@@ -29,28 +32,37 @@ export function DemoDayGallery() {
         className="mx-auto mb-12 [&_h2]:text-ink-950"
       />
       <div className="relative mx-auto max-w-4xl">
-        {photo.videoId ? (
-          <VideoThumbnail
+        <AnimatePresence mode="wait" initial={false}>
+          <motion.div
             key={photo.id}
-            videoId={photo.videoId}
-            src={photo.src}
-            alt={photo.caption}
-            sizes={MAIN_SIZES}
-            aspectClassName="aspect-video"
-            autoPlay
-            className="shadow-soft"
-          />
-        ) : (
-          <div className="relative aspect-video overflow-hidden rounded-lg shadow-soft">
-            <Image
-              src={photo.src}
-              alt={photo.caption}
-              fill
-              sizes={MAIN_SIZES}
-              className="object-cover"
-            />
-          </div>
-        )}
+            initial={{ opacity: reduced ? 1 : 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: reduced ? 1 : 0 }}
+            transition={{ duration: reduced ? 0 : duration.base, ease: easeOutSoft }}
+          >
+            {photo.videoId ? (
+              <VideoThumbnail
+                videoId={photo.videoId}
+                src={photo.src}
+                alt={photo.caption}
+                sizes={MAIN_SIZES}
+                aspectClassName="aspect-video"
+                autoPlay
+                className="shadow-soft"
+              />
+            ) : (
+              <div className="relative aspect-video overflow-hidden rounded-lg shadow-soft">
+                <Image
+                  src={photo.src}
+                  alt={photo.caption}
+                  fill
+                  sizes={MAIN_SIZES}
+                  className="object-cover"
+                />
+              </div>
+            )}
+          </motion.div>
+        </AnimatePresence>
 
         <button
           type="button"
@@ -81,7 +93,7 @@ export function DemoDayGallery() {
             aria-label={`Show video ${i + 1} of ${total}: ${thumb.caption}`}
             aria-current={i === index}
             className={cn(
-              "group relative aspect-video w-20 shrink-0 overflow-hidden rounded-md ring-2 transition-all sm:w-28",
+              "group relative aspect-video w-20 shrink-0 overflow-hidden rounded-md ring-2 transition-all duration-[var(--duration-fast)] ease-out-soft sm:w-28",
               i === index
                 ? "ring-ink-950"
                 : "opacity-60 ring-transparent hover:opacity-100",

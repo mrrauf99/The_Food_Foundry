@@ -18,6 +18,8 @@ export const metadata: Metadata = buildMetadata({
 export default function ContactPage() {
   return (
     <>
+      {/* Above-the-fold, like the home Hero — CSS stagger rather than Framer Motion
+          so there's no wait on hydration and nothing sits at opacity:0 if JS fails. */}
       <Section className="bg-ink-950 text-cream-50">
         <SectionHeading
           as="h1"
@@ -25,9 +27,12 @@ export default function ContactPage() {
           eyebrow="Contact"
           title="Get in touch"
           description="Questions about the program, partnerships, or applying to the next cohort — we'd love to hear from you."
-          className="mx-auto mb-12 [&_p]:text-cream-100/70"
+          className="animate-fade-up mx-auto mb-12 [&_p]:text-cream-100/70"
         />
-        <div className="grid overflow-hidden rounded-lg bg-ink-900/60 md:grid-cols-2">
+        <div
+          className="animate-fade-up grid overflow-hidden rounded-lg bg-ink-900/60 md:grid-cols-2"
+          style={{ animationDelay: "120ms" }}
+        >
           <div className="bg-cream-50 p-8 text-ink-950 md:p-10">
             <ContactForm />
           </div>

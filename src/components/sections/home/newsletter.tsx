@@ -1,3 +1,4 @@
+import { Reveal } from "@/components/motion/reveal";
 import { Section } from "@/components/ui/section";
 import { NewsletterForm } from "@/components/sections/shared/newsletter-form";
 import { LinkedinIcon, InstagramIcon, XIcon, YoutubeIcon } from "@/components/icons/social-icons";
@@ -13,7 +14,7 @@ const socialLinks = [
 export function Newsletter() {
   return (
     <Section className="bg-teal-500 text-ink-950">
-      <div className="mx-auto max-w-xl text-center">
+      <Reveal className="mx-auto max-w-xl text-center">
         <h2 className="font-display text-4xl">Keep up with Food Foundry</h2>
         <p className="mt-3 text-ink-950/80">
           Get cohort announcements, Demo Day invites, and founder resources in your inbox.
@@ -34,7 +35,7 @@ export function Newsletter() {
             </li>
           ))}
         </ul>
-      </div>
+      </Reveal>
     </Section>
   );
 }
