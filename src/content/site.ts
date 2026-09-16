@@ -1,9 +1,10 @@
 export const site = {
   name: "Food Foundry",
   tagline:
-    "A founder community and accelerator program for innovative businesses and visionary founders disrupting the food and foodservice industry.",
+    "A founder community and accelerator program for the founders and startups changing how food and foodservice work.",
   url: "https://www.thefoodfoundry.com",
   email: "team@thefoodfoundry.com",
+  foundedYear: 2018,
   address: {
     line1: "1 N Dearborn",
     line2: "Chicago, IL 60654",
@@ -19,9 +20,9 @@ export const site = {
 
 export const primaryNav = [
   { label: "Home", href: "/" },
-  { label: "Meet Our Startups", href: "/startups" },
-  { label: "Our Accelerator Program", href: "/program" },
-  { label: "Contact Us", href: "/contact" },
+  { label: "Our Startups", href: "/startups" },
+  { label: "The Program", href: "/program" },
+  { label: "Contact", href: "/contact" },
 ];
 
 export const footerNav = primaryNav;

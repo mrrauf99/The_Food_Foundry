@@ -16,7 +16,7 @@ export const partners: Partner[] = [
   {
     id: "1871",
     name: "1871",
-    description: "Chicago's hub for digital technology startups.",
+    description: "Chicago's hub for digital tech startups.",
     websiteUrl: "https://1871.com/",
   },
 ];

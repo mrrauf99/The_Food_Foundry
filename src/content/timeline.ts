@@ -1,4 +1,5 @@
 import type { TimelineStep } from "@/types/content";
+import { alumniCountLabel } from "@/content/startups";
 import { FileEdit, Handshake, GraduationCap, TrendingUp, PartyPopper } from "lucide-react";
 
 export const founderJourneySteps: TimelineStep[] = [
@@ -8,7 +9,7 @@ export const founderJourneySteps: TimelineStep[] = [
     title: "Apply",
     duration: "Cohort application",
     description:
-      "Early-stage founders disrupting food and foodservice apply to join the next Food Foundry cohort.",
+      "Early-stage founders in food and foodservice apply to join the next Food Foundry cohort.",
     icon: FileEdit,
   },
   {
@@ -17,7 +18,7 @@ export const founderJourneySteps: TimelineStep[] = [
     title: "Onboarding",
     duration: "Kickoff",
     description:
-      "Accepted founders join the cohort, meet the Food Foundry team, and get access to the Relish Works and Gordon Food Service network.",
+      "Accepted founders meet the Food Foundry team, join the cohort, and get access to the Relish Works and Gordon Food Service network.",
     icon: Handshake,
   },
   {
@@ -26,16 +27,16 @@ export const founderJourneySteps: TimelineStep[] = [
     title: "Mentorship & Curriculum",
     duration: "Core program",
     description:
-      "1:1 mentorship, specialized programming, and exclusive events built around the realities of the foodservice industry.",
+      "One-on-one mentorship, specialized programming, and exclusive events built around how foodservice actually works.",
     icon: GraduationCap,
   },
   {
     id: "funding",
     order: 4,
-    title: "Funding Intros",
+    title: "Investor Intros",
     duration: "Throughout the cohort",
     description:
-      "Direct introductions to Food Foundry's network of investors, venture capitalists, and other funding opportunities.",
+      "Direct introductions to Food Foundry's investors, venture capitalists, and other funding sources.",
     icon: TrendingUp,
   },
   {
@@ -44,7 +45,7 @@ export const founderJourneySteps: TimelineStep[] = [
     title: "Demo Day & Alumni Network",
     duration: "Program finale",
     description:
-      "Founders pitch to investors and industry leaders at Demo Day, then join a growing alumni network of 30+ companies.",
+      `Founders pitch to investors and industry leaders at Demo Day, then join an alumni network of ${alumniCountLabel} companies.`,
     icon: PartyPopper,
   },
 ];

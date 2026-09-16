@@ -323,6 +323,9 @@ export function getFeaturedStartups() {
   return startups.filter((s) => s.featured);
 }
 
+// Single source for the "30+ companies" count.
+export const alumniCountLabel = `${startups.length}+`;
+
 export function getCategoryMeta(id: StartupCategory) {
   return categories.find((c) => c.id === id)!;
 }

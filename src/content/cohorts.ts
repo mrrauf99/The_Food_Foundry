@@ -6,28 +6,28 @@ export const cohorts: Cohort[] = [
     label: "Cohort 6",
     year: "2024",
     description:
-      "Five startups leveraging the metaverse, Web3, AR/VR, front-of-house automation, retail tech, and AI to reshape the restaurant experience.",
+      "Five startups using the metaverse, Web3, AR/VR, front-of-house automation, retail tech, and AI to change the restaurant experience.",
   },
   {
     number: 5,
     label: "Cohort 5",
     year: "2023",
     description:
-      "Five early-stage companies tackling supply chain resilience and sustainable packaging for the foodservice industry.",
+      "Five early-stage companies working on supply chain resilience and sustainable packaging for foodservice.",
   },
   {
     number: 4,
     label: "Cohort 4",
     year: "",
     description:
-      "Seven food companies headed toward foodservice, from upcycled snacks to better-for-you condiments and proteins.",
+      "Seven food companies moving into foodservice, from upcycled snacks to better-for-you condiments and proteins.",
   },
   {
     number: 3,
     label: "Cohort 3",
     year: "",
     description:
-      "Four companies fueling the future of restaurant ordering, dining, and reusable packaging.",
+      "Four companies working on restaurant ordering, dining, and reusable packaging.",
   },
   {
     number: 2,
@@ -41,7 +41,7 @@ export const cohorts: Cohort[] = [
     label: "Cohort 1",
     year: "",
     description:
-      "The founding cohort — four companies that launched Food Foundry's track record in restaurant and supply chain innovation.",
+      "The founding cohort: four companies in restaurant and supply chain innovation that started Food Foundry's track record.",
   },
 ];
 
