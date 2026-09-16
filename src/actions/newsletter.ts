@@ -9,19 +9,25 @@ const schema = z.object({
 export interface NewsletterState {
   status: "idle" | "success" | "error";
   message?: string;
+  // Returned on error to refill the input.
+  email?: string;
 }
 
 export async function subscribeToNewsletter(
   _prevState: NewsletterState,
   formData: FormData,
 ): Promise<NewsletterState> {
-  const parsed = schema.safeParse({ email: formData.get("email") });
+  const email = String(formData.get("email") ?? "");
+  const parsed = schema.safeParse({ email });
 
   if (!parsed.success) {
-    return { status: "error", message: parsed.error.issues[0]?.message ?? "Invalid email." };
+    return {
+      status: "error",
+      message: parsed.error.issues[0]?.message ?? "Enter a valid email address.",
+      email,
+    };
   }
 
-  // NOTE: no email service provider is connected yet. Wire this up to your ESP
-  // (e.g. Resend, Mailchimp, Klaviyo) before relying on this in production.
-  return { status: "success", message: "You're on the list — thanks for signing up." };
+  // TODO: connect an email provider; signups are not stored yet.
+  return { status: "success", message: "You're on the list. Thanks for signing up." };
 }

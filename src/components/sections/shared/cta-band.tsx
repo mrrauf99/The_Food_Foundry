@@ -14,8 +14,8 @@ export function CtaBand({
       <Reveal className="mx-auto max-w-2xl text-center">
         <h2 className="font-display text-4xl leading-heading text-balance md:text-5xl">{title}</h2>
         <p className="mt-4 text-lg text-cream-100/75">{description}</p>
-        <div className="mt-8 flex flex-wrap justify-center gap-4">
-          <Button href="/contact" variant="secondary" size="lg">
+        <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row sm:gap-4">
+          <Button href="/contact?intent=apply" variant="secondary" size="lg">
             Apply Now
           </Button>
           <Button
@@ -24,7 +24,7 @@ export function CtaBand({
             size="lg"
             className="border-cream-50/30 text-cream-50 hover:bg-cream-50/10"
           >
-            Learn About the Program
+            Explore the Program
           </Button>
         </div>
       </Reveal>

@@ -23,8 +23,13 @@ export function OfficeInfo() {
       </div>
 
       <p className="mt-8 text-sm font-semibold uppercase tracking-wide text-teal-300">Email Us</p>
-      <Button href={`mailto:${site.email}`} variant="secondary" size="md" className="mt-3">
-        <Mail className="size-4" aria-hidden />
+      <Button
+        href={`mailto:${site.email}`}
+        variant="secondary"
+        size="md"
+        className="mt-3 h-auto min-h-11 max-w-full gap-1.5 px-3 py-2 text-xs whitespace-normal break-all sm:gap-2 sm:px-5 sm:text-sm"
+      >
+        <Mail className="size-4 shrink-0" aria-hidden />
         {site.email}
       </Button>
 

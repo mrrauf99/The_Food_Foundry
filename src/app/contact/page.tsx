@@ -11,47 +11,71 @@ import { buildMetadata } from "@/lib/seo/metadata";
 export const metadata: Metadata = buildMetadata({
   title: "Contact Us",
   description:
-    "Get in touch with the Food Foundry team in Chicago — questions about the accelerator, partnerships, or applying to the next cohort.",
+    "Reach the Food Foundry team in Chicago with questions about the accelerator, partnerships, or applying to the next cohort.",
   path: "/contact",
 });
 
-export default function ContactPage() {
+// Apply buttons link here with ?intent=apply; applications run through this form.
+const copy = {
+  apply: {
+    eyebrow: "Apply",
+    title: "Apply to the next cohort",
+    description:
+      "Tell us what you're building, what stage you're at, and where you're based. We'll reply with the next cohort's dates, terms, and requirements.",
+  },
+  contact: {
+    eyebrow: "Contact",
+    title: "Get in touch",
+    description:
+      "Have a question about the program, a partnership, or applying to the next cohort? We'd love to hear from you.",
+  },
+};
+
+export default async function ContactPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ intent?: string | string[] }>;
+}) {
+  const { intent } = await searchParams;
+  const mode = intent === "apply" ? "apply" : "contact";
+  const { eyebrow, title, description } = copy[mode];
+
   return (
     <>
-      {/* Above-the-fold, like the home Hero — CSS stagger rather than Framer Motion
-          so there's no wait on hydration and nothing sits at opacity:0 if JS fails. */}
+      {/* CSS animation, not Framer Motion: above the fold, it shouldn't wait on hydration. */}
       <Section className="bg-ink-950 text-cream-50">
         <SectionHeading
           as="h1"
           align="center"
-          eyebrow="Contact"
-          title="Get in touch"
-          description="Questions about the program, partnerships, or applying to the next cohort — we'd love to hear from you."
-          className="animate-fade-up mx-auto mb-12 [&_p]:text-cream-100/70"
+          eyebrow={eyebrow}
+          title={title}
+          description={description}
+          tone="dark"
+          className="animate-fade-up mx-auto mb-12"
         />
         <div
-          className="animate-fade-up grid overflow-hidden rounded-lg bg-ink-900/60 md:grid-cols-2"
+          className="animate-fade-up grid grid-cols-1 overflow-hidden rounded-lg bg-ink-900/60 md:grid-cols-2"
           style={{ animationDelay: "120ms" }}
         >
-          <div className="bg-cream-50 p-8 text-ink-950 md:p-10">
-            <ContactForm />
+          <div className="min-w-0 bg-cream-50 p-6 text-ink-950 sm:p-8 md:p-10">
+            <ContactForm intent={mode} />
           </div>
-          <div className="flex flex-col justify-between gap-10 p-8 md:p-10">
+          <div className="flex min-w-0 flex-col justify-between gap-10 p-6 sm:p-8 md:p-10">
             <OfficeInfo />
             <MapEmbed />
           </div>
         </div>
       </Section>
 
-      <FaqSection title="Frequently asked" items={contactFaq} className="bg-cream-50" />
+      <FaqSection title="Common questions" items={contactFaq} className="bg-cream-50" />
 
       <Section className="bg-teal-500 text-ink-950">
         <div className="mx-auto max-w-xl text-center">
           <h2 className="font-display text-3xl">Prefer email updates?</h2>
-          <p className="mt-2 text-ink-950/80">
-            Sign up for cohort announcements and founder resources.
+          <p className="mt-2 text-ink-950">
+            Get cohort announcements and founder resources by email.
           </p>
-          <NewsletterForm className="mt-6 [&_input]:border-ink-950/15 [&_input]:bg-cream-50 [&_input]:text-ink-950 [&_input]:placeholder:text-ink-500" />
+          <NewsletterForm className="mt-6" />
         </div>
       </Section>
     </>
