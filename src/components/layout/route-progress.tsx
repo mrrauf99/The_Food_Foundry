@@ -9,8 +9,7 @@ const TRICKLE_TARGET = 88;
 const SAFETY_TIMEOUT_MS = 8000;
 
 function isNavigableClick(event: MouseEvent) {
-  // Next.js Link already calls preventDefault() to do client-side routing,
-  // so defaultPrevented is expected here and must not disqualify the click.
+  // Don't check defaultPrevented: Next.js Link always sets it.
   if (event.button !== 0) return false;
   if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return false;
 
@@ -107,7 +106,7 @@ function RouteProgressInner() {
     >
       <div
         data-route-progress-bar
-        className="h-full bg-teal-400 shadow-[0_0_8px_rgba(61,214,194,0.7)] transition-[width,opacity] duration-200 ease-out"
+        className="h-full bg-teal-400 shadow-[0_0_8px_var(--color-teal-400)] transition-[width,opacity] duration-200 ease-out"
         style={{
           width: `${progress}%`,
           opacity: visible ? 1 : 0,

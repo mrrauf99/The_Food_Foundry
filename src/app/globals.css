@@ -1,12 +1,14 @@
 @import "tailwindcss";
 
-:root {
+/* Single source of truth for design tokens. `static` emits every variable to :root,
+   so plain CSS and arbitrary values like duration-[var(--duration-fast)] can read them. */
+@theme static {
   /* Ink / dark-teal neutral (dark section backgrounds, primary text on light bg) */
   --color-ink-950: #12262a;
   --color-ink-900: #172f34;
   --color-ink-800: #1e3d43;
   --color-ink-700: #2c4d53;
-  --color-ink-500: #5c7d82;
+  --color-ink-500: #4f7176; /* muted text and placeholders: 5.0:1 on cream-50, 4.6:1 on cream-100 */
   --color-ink-300: #9cb8bb;
 
   /* Cream neutral (light section backgrounds) */
@@ -14,76 +16,55 @@
   --color-cream-100: #f4eee0;
   --color-cream-200: #ece2cb;
 
-  /* Teal (primary accent — one hue family with ink, different lightness) */
+  /* Surface for raised cards and search fields on cream. */
+  --color-surface: #ffffff;
+
+  /* Teal (primary accent, one hue family with ink, different lightness) */
   --color-teal-300: #7fe3d4;
   --color-teal-400: #3dd6c2;
   --color-teal-500: #14b8a6;
   --color-teal-600: #0d9488;
+  --color-teal-700: #0f766e; /* text on cream: ~5:1, where teal-600 fails AA */
 
-  /* Gold (secondary accent — sticker/badge motif only) */
+  /* Gold (secondary accent, sticker/badge motif only) */
   --color-gold-300: #f7d774;
   --color-gold-400: #f0c33e;
   --color-gold-500: #dba916;
 
-  --shadow-color: 210 30% 10%;
+  /* Error text and borders on light surfaces: 6.1:1 on cream-50. */
+  --color-error: #b91c1c;
+
+  /* Two-tone focus ring: ink outline plus a cream halo, so it holds 3:1 on every band. */
+  --color-focus: var(--color-ink-950);
+  --color-focus-halo: var(--color-cream-50);
+
   --radius-sm: 0.375rem;
   --radius-md: 0.75rem;
   --radius-lg: 1.5rem;
 
-  /* Motion — the whole site's easing/duration vocabulary. Mirrored in
-     src/lib/motion.ts for Framer Motion, so CSS and JS never drift apart.
-     Pick by travel distance: fast for affordances, slow for large surfaces. */
+  --shadow-soft: 0 1px 2px rgb(18 38 42 / 0.06), 0 8px 24px -8px rgb(18 38 42 / 0.18);
+  --shadow-lifted: 0 2px 4px rgb(18 38 42 / 0.08), 0 16px 40px -12px rgb(18 38 42 / 0.28);
+
+  /* Motion tokens. Mirrored in src/lib/motion.ts for Framer Motion. */
   --ease-out-soft: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-in-out-soft: cubic-bezier(0.65, 0, 0.35, 1);
   --duration-fast: 150ms;
   --duration-base: 250ms;
   --duration-slow: 350ms;
-}
 
-@theme inline {
-  --color-ink-950: var(--color-ink-950);
-  --color-ink-900: var(--color-ink-900);
-  --color-ink-800: var(--color-ink-800);
-  --color-ink-700: var(--color-ink-700);
-  --color-ink-500: var(--color-ink-500);
-  --color-ink-300: var(--color-ink-300);
-
-  --color-cream-50: var(--color-cream-50);
-  --color-cream-100: var(--color-cream-100);
-  --color-cream-200: var(--color-cream-200);
-
-  --color-teal-300: var(--color-teal-300);
-  --color-teal-400: var(--color-teal-400);
-  --color-teal-500: var(--color-teal-500);
-  --color-teal-600: var(--color-teal-600);
-
-  --color-gold-300: var(--color-gold-300);
-  --color-gold-400: var(--color-gold-400);
-  --color-gold-500: var(--color-gold-500);
-
-  --font-display: var(--font-anton);
-  --font-sans: var(--font-inter);
-
-  /* Anton's ink spans a full 1.0em (0.87 ascent + 0.13 descent), so any
-     line-height at or below 1.0 makes descenders collide with the next line.
-     These two tokens stay above that floor — use them for all display type. */
-  --leading-display: 1.14; /* hero-scale headings */
-  --leading-heading: 1.14; /* section headings, usually 2-3 lines */
-
-  --radius-sm: var(--radius-sm);
-  --radius-md: var(--radius-md);
-  --radius-lg: var(--radius-lg);
-
-  --shadow-soft: 0 1px 2px rgb(18 38 42 / 0.06), 0 8px 24px -8px rgb(18 38 42 / 0.18);
-  --shadow-lifted: 0 2px 4px rgb(18 38 42 / 0.08), 0 16px 40px -12px rgb(18 38 42 / 0.28);
-
-  /* Exposes the motion curves as `ease-out-soft` / `ease-in-out-soft` utilities. */
-  --ease-out-soft: var(--ease-out-soft);
-  --ease-in-out-soft: var(--ease-in-out-soft);
+  /* Anton's glyphs fill the full 1em, so line-height <= 1 collides descenders. */
+  --leading-display: 1.14;
+  --leading-heading: 1.14;
 
   --animate-fade-up: fade-up 0.6s var(--ease-out-soft) both;
 
   --breakpoint-xs: 22.5rem;
+}
+
+/* next/font sets these on <html>, so utilities must reference them directly. */
+@theme inline {
+  --font-display: var(--font-anton);
+  --font-sans: var(--font-inter);
 }
 
 @keyframes fade-up {
@@ -126,23 +107,51 @@ body {
   color: var(--color-ink-950);
 }
 
-:focus-visible {
-  outline: 2px solid var(--color-teal-500);
-  outline-offset: 2px;
-  border-radius: 2px;
+/* Tailwind v4 dropped the pointer cursor on buttons; restore it. */
+button:not(:disabled),
+[role="button"]:not([aria-disabled="true"]) {
+  cursor: pointer;
 }
 
+/* Unlayered, so it wins over component utilities. Keep the element's own radius so
+   pills and circular buttons stay round when focused. */
+:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 2px var(--color-focus-halo);
+}
+
+/* Reduced motion keeps state changes but drops travel: fades and color shifts stay,
+   slides and height animations become opacity-only, and smooth scrolling stops. */
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-    /* Staggered entrances set an animation-delay; without this the element
-       stays at its `both`-filled opacity:0 for the full delay before popping in. */
-    animation-delay: 0ms !important;
-    transition-delay: 0ms !important;
+  html {
+    scroll-behavior: auto;
+  }
+
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes accordion-down {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes accordion-up {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
   }
 }

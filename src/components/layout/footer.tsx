@@ -32,13 +32,13 @@ export function Footer() {
           </div>
 
           <div>
-            <p className="text-sm font-semibold uppercase tracking-wide text-cream-100/50">
+            <p className="text-sm font-semibold uppercase tracking-wide text-cream-100/60">
               Navigate
             </p>
-            <ul className="mt-4 space-y-3">
+            <ul className="mt-2">
               {footerNav.map((link) => (
                 <li key={link.href}>
-                  <Link href={link.href} className="text-sm text-cream-50 hover:text-teal-300">
+                  <Link href={link.href} className="inline-flex min-h-11 items-center text-sm text-cream-50 hover:text-teal-300">
                     {link.label}
                   </Link>
                 </li>
@@ -47,7 +47,7 @@ export function Footer() {
           </div>
 
           <div>
-            <p className="text-sm font-semibold uppercase tracking-wide text-cream-100/50">
+            <p className="text-sm font-semibold uppercase tracking-wide text-cream-100/60">
               Get in touch
             </p>
             <ul className="mt-4 space-y-3 text-sm text-cream-50">
@@ -61,7 +61,7 @@ export function Footer() {
               </li>
               <li className="flex items-center gap-2">
                 <Mail className="size-4 shrink-0 text-teal-400" aria-hidden />
-                <a href={`mailto:${site.email}`} className="hover:text-teal-300">
+                <a href={`mailto:${site.email}`} className="inline-flex min-h-11 items-center hover:text-teal-300">
                   {site.email}
                 </a>
               </li>
@@ -74,7 +74,7 @@ export function Footer() {
                     target="_blank"
                     rel="noreferrer noopener"
                     aria-label={label}
-                    className="inline-flex size-10 items-center justify-center rounded-full border border-cream-50/15 text-cream-50 transition-colors hover:border-teal-400 hover:text-teal-300"
+                    className="inline-flex size-11 items-center justify-center rounded-full border border-cream-50/15 text-cream-50 transition-colors hover:border-teal-400 hover:text-teal-300"
                   >
                     <Icon className="size-4" aria-hidden />
                   </a>
@@ -84,9 +84,9 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 flex flex-col gap-2 border-t border-cream-50/10 pt-6 text-xs text-cream-100/50 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-12 flex flex-col gap-2 border-t border-cream-50/10 pt-6 text-xs text-cream-100/60 sm:flex-row sm:items-center sm:justify-between">
           <p>© {new Date().getFullYear()} Food Foundry. All rights reserved.</p>
-          <p>Built by founders, for founders — Chicago, IL.</p>
+          <p>Built with Relish Works and Gordon Food Service. Chicago, IL.</p>
         </div>
       </div>
     </footer>

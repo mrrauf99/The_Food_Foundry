@@ -2,10 +2,7 @@ import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
-/**
- * The brand's signature rotated "sticker" label — used only for cohort badges,
- * numeral callouts, and the hero accent. Not a general-purpose badge.
- */
+/** Rotated brand sticker for cohort labels. Not a general-purpose badge. */
 const stickerVariants = cva(
   "inline-block -rotate-2 rounded-sm px-3 py-1 font-display text-sm tracking-wide shadow-soft",
   {

@@ -7,7 +7,7 @@ export function StatTile({ stat }: { stat: Stat }) {
       <p className="mt-2 text-sm font-medium uppercase tracking-wide text-cream-100/80">
         {stat.label}
       </p>
-      {stat.detail ? <p className="mt-0.5 text-xs text-cream-100/50">{stat.detail}</p> : null}
+      {stat.detail ? <p className="mt-0.5 text-xs text-cream-100/60">{stat.detail}</p> : null}
     </div>
   );
 }

@@ -8,7 +8,7 @@ export default function NotFound() {
         <p className="font-display text-7xl text-teal-400">404</p>
         <h1 className="mt-4 font-display text-4xl">This page has left the kitchen</h1>
         <p className="mt-4 text-cream-100/75">
-          The page you&apos;re looking for doesn&apos;t exist or has moved.
+          We couldn&apos;t find that page. It may have moved or never existed.
         </p>
         <div className="mt-8 flex flex-wrap justify-center gap-4">
           <Button href="/" variant="secondary">

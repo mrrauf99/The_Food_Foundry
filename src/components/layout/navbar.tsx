@@ -4,7 +4,7 @@ import * as React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { Menu } from "lucide-react";
 import { primaryNav } from "@/content/site";
 import { NavDrawer } from "@/components/layout/nav-drawer";
@@ -13,15 +13,31 @@ import { cn } from "@/lib/utils";
 
 export function Navbar() {
   const pathname = usePathname();
+  const reduced = useReducedMotion();
   const [scrolled, setScrolled] = React.useState(false);
 
-  // Storing *which* route the drawer was opened on, rather than a bare boolean,
-  // means navigation closes it for free — including browser back/forward — with no
-  // effect syncing the two pieces of state.
+  // Keyed to the route it opened on, so any navigation (including back) closes it.
   const [openPath, setOpenPath] = React.useState<string | null>(null);
   const open = openPath === pathname;
 
   const close = React.useCallback(() => setOpenPath(null), []);
+
+  // One persistent underline that only moves along x, measured inside the nav.
+  // A shared layoutId measured page coordinates, so the scroll reset on
+  // navigation made it fly in vertically.
+  const navRef = React.useRef<HTMLElement>(null);
+  const [underline, setUnderline] = React.useState<{ x: number; width: number } | null>(null);
+
+  React.useLayoutEffect(() => {
+    const measure = () => {
+      const active = navRef.current?.querySelector<HTMLElement>('a[aria-current="page"]');
+      setUnderline(active ? { x: active.offsetLeft, width: active.offsetWidth } : null);
+    };
+    measure();
+    document.fonts.ready.then(measure);
+    window.addEventListener("resize", measure);
+    return () => window.removeEventListener("resize", measure);
+  }, [pathname]);
 
   React.useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 8);
@@ -31,10 +47,8 @@ export function Navbar() {
   }, []);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-cream-50/10 bg-ink-950/95 backdrop-blur supports-backdrop-filter:bg-ink-950/80">
-      {/* Separates the sticky header from content once you've scrolled. A gradient
-          layer whose opacity animates, rather than a transitioned box-shadow —
-          shadow transitions repaint the whole header on every frame. */}
+    <header className="sticky top-0 z-50 border-b border-cream-50/10 bg-ink-950">
+      {/* Scroll shadow as a fading layer; animating box-shadow repaints every frame. */}
       <div
         aria-hidden
         className={cn(
@@ -44,7 +58,7 @@ export function Navbar() {
       />
 
       <div className="mx-auto flex h-20 max-w-6xl items-center justify-between px-6">
-        <Link href="/" className="relative h-8 w-40 shrink-0" aria-label="Food Foundry home">
+        <Link href="/" className="relative h-11 w-40 shrink-0" aria-label="Food Foundry home">
           <Image
             src="/images/brand/ff-wordmark.png"
             alt="Food Foundry"
@@ -55,7 +69,7 @@ export function Navbar() {
           />
         </Link>
 
-        <nav className="hidden items-center gap-8 md:flex" aria-label="Primary">
+        <nav ref={navRef} className="relative hidden items-center gap-8 md:flex" aria-label="Primary">
           {primaryNav.map((link) => {
             const active = pathname === link.href;
             return (
@@ -69,38 +83,41 @@ export function Navbar() {
                 )}
               >
                 {link.label}
-                {active ? (
-                  // Shared layoutId: the underline travels to the new link on
-                  // navigation instead of blinking out and in somewhere else.
-                  <motion.span
-                    layoutId="nav-active-underline"
-                    className="absolute -bottom-0.5 left-0 h-0.5 w-full rounded-full bg-gold-400"
-                    transition={{ type: "spring", stiffness: 380, damping: 32 }}
-                  />
-                ) : null}
               </Link>
             );
           })}
+          {underline ? (
+            <motion.span
+              aria-hidden
+              className="pointer-events-none absolute -bottom-0.5 left-0 h-0.5 w-px origin-left bg-gold-400"
+              initial={false}
+              animate={{ x: underline.x, scaleX: underline.width }}
+              transition={reduced ? { duration: 0 } : { type: "spring", stiffness: 380, damping: 32 }}
+            />
+          ) : null}
         </nav>
 
         <div className="hidden md:block">
-          <Button href="/contact" variant="secondary" size="md">
+          <Button href="/contact?intent=apply" variant="secondary" size="md">
             Apply Now
           </Button>
         </div>
 
-        {/* Swap `md:hidden` for `hidden` here (and drop the desktop <nav> above)
-            to make the drawer the only navigation at every width. */}
-        <button
-          type="button"
-          className="inline-flex size-11 items-center justify-center rounded-md text-cream-50 transition-[color,transform] duration-[var(--duration-fast)] ease-out-soft hover:text-teal-300 active:scale-90 motion-reduce:active:scale-100 md:hidden"
-          aria-label="Open menu"
-          aria-haspopup="dialog"
-          aria-expanded={open}
-          onClick={() => setOpenPath(pathname)}
-        >
-          <Menu className="size-6" aria-hidden />
-        </button>
+        <div className="flex items-center gap-2 md:hidden">
+          <Button href="/contact?intent=apply" variant="secondary" size="md" className="px-4">
+            Apply
+          </Button>
+          <button
+            type="button"
+            className="inline-flex size-11 items-center justify-center rounded-md text-cream-50 transition-[color,transform] duration-[var(--duration-fast)] ease-out-soft hover:text-teal-300 active:scale-90 motion-reduce:active:scale-100 md:hidden"
+            aria-label="Open menu"
+            aria-haspopup="dialog"
+            aria-expanded={open}
+            onClick={() => setOpenPath(pathname)}
+          >
+            <Menu className="size-6" aria-hidden />
+          </button>
+        </div>
       </div>
 
       <NavDrawer open={open} onClose={close} />

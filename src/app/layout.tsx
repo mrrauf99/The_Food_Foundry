@@ -41,10 +41,8 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${anton.variable} ${inter.variable} h-full`}
-      // Browser extensions (QuillBot, Grammarly, password managers) inject
-      // attributes onto <html> before React hydrates, which reads as a mismatch.
-      // This suppresses the diff for this element's own attributes only —
-      // real mismatches anywhere below it still surface.
+      // Extensions add attributes to <html> before hydration. Only this element's
+      // own attributes are exempt; mismatches below it still surface.
       suppressHydrationWarning
     >
       <head>

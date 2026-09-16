@@ -22,8 +22,7 @@ export function StaggerGroup({
       viewport={{ once: true, margin: "-80px" }}
       variants={{
         hidden: {},
-        // Zeroed under reduced motion — otherwise items still arrive one by one,
-        // just instantly, which is the same distraction the setting asks to avoid.
+        // No stagger under reduced motion; instant one-by-one is still motion.
         visible: { transition: { staggerChildren: reduced ? 0 : 0.08 } },
       }}
     >

@@ -27,12 +27,8 @@ const socialLinks = [
 const FOCUSABLE_SELECTOR = "a[href], button:not([disabled])";
 
 export function NavDrawer({ open, onClose }: { open: boolean; onClose: () => void }) {
-  // The sticky header sets `backdrop-filter`, which makes it a containing block for
-  // fixed-position descendants — a drawer rendered inside it would be clipped to the
-  // header's 80px box. Portalling to <body> keeps it anchored to the viewport.
-  //
-  // No mount-guard state needed: this renders nothing on the server and nothing on
-  // the first client render (the drawer starts closed), so there's no hydration diff.
+  // Portalled to <body>: the header's backdrop-filter would otherwise clip this
+  // fixed drawer to the header box. Safe without a mount guard: it starts closed.
   if (typeof document === "undefined") return null;
 
   return createPortal(
@@ -47,8 +43,7 @@ function DrawerPanel({ onClose }: { onClose: () => void }) {
   const panelRef = React.useRef<HTMLDivElement>(null);
   const closeRef = React.useRef<HTMLButtonElement>(null);
 
-  // Freeze the page behind the drawer. Padding compensates for the scrollbar it
-  // removes, so the sticky header doesn't jump sideways as the drawer opens.
+  // Lock scroll; padding replaces the scrollbar width so the header doesn't shift.
   React.useEffect(() => {
     const { body } = document;
     const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
@@ -64,8 +59,7 @@ function DrawerPanel({ onClose }: { onClose: () => void }) {
     };
   }, []);
 
-  // Escape closes, Tab cycles within the panel, and focus returns to whatever
-  // opened it. Cleanup runs after the exit animation, so focus lands at the end.
+  // Escape closes, Tab is trapped, and focus returns to the opener on close.
   React.useEffect(() => {
     const previouslyFocused = document.activeElement as HTMLElement | null;
     closeRef.current?.focus();
@@ -117,7 +111,7 @@ function DrawerPanel({ onClose }: { onClose: () => void }) {
       <motion.div
         aria-hidden
         onClick={onClose}
-        className="absolute inset-0 bg-ink-950/60 backdrop-blur-sm"
+        className="absolute inset-0 bg-ink-950/70"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
@@ -131,8 +125,7 @@ function DrawerPanel({ onClose }: { onClose: () => void }) {
         aria-label="Site menu"
         className="absolute inset-y-0 right-0 flex w-[min(21rem,85vw)] flex-col border-l border-cream-50/10 bg-ink-950 shadow-[-16px_0_48px_-12px_rgb(0_0_0/0.5)]"
         initial={{ x: "100%" }}
-        // Springs in from the edge it's anchored to, then leaves on a shorter
-        // tween — an exit that lingers reads as lag when you're already moving on.
+        // Shorter exit than entrance: a lingering exit reads as lag.
         animate={{ x: 0, transition: reduced ? { duration: 0 } : drawerSpring }}
         exit={{
           x: "100%",
@@ -140,7 +133,7 @@ function DrawerPanel({ onClose }: { onClose: () => void }) {
         }}
       >
         <div className="flex h-20 shrink-0 items-center justify-between border-b border-cream-50/10 px-6">
-          <span className="text-xs font-semibold uppercase tracking-[0.2em] text-cream-100/50">
+          <span className="text-xs font-semibold uppercase tracking-[0.2em] text-cream-100/60">
             Menu
           </span>
           <button
@@ -188,7 +181,7 @@ function DrawerPanel({ onClose }: { onClose: () => void }) {
                       <span>{link.label}</span>
                       <ArrowRight
                         aria-hidden
-                        className="size-4 shrink-0 opacity-0 transition-[opacity,transform] duration-[var(--duration-fast)] ease-out-soft group-hover:translate-x-0.5 group-hover:opacity-60"
+                        className="size-4 shrink-0 opacity-0 transition-[opacity,transform] duration-[var(--duration-fast)] ease-out-soft group-hover:translate-x-0.5 group-hover:opacity-60 motion-reduce:group-hover:translate-x-0"
                       />
                     </Link>
                   </motion.li>
@@ -199,7 +192,7 @@ function DrawerPanel({ onClose }: { onClose: () => void }) {
 
           <motion.div variants={itemVariants} className="mt-8">
             <Button
-              href="/contact"
+              href="/contact?intent=apply"
               variant="secondary"
               size="lg"
               className="w-full"

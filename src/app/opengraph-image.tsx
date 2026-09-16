@@ -4,6 +4,7 @@ import { site } from "@/content/site";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
+// ImageResponse cannot read CSS variables, so brand hex values are repeated here (see globals.css).
 export default async function Image() {
   return new ImageResponse(
     (
@@ -23,7 +24,7 @@ export default async function Image() {
           FOOD FOUNDRY
         </div>
         <div style={{ fontSize: 62, fontWeight: 800, marginTop: 24, lineHeight: 1.1, maxWidth: 980 }}>
-          A founder community and accelerator for food & foodservice innovation
+          A founder community and accelerator for food & foodservice startups
         </div>
         <div style={{ fontSize: 26, marginTop: 32, color: "#dba916" }}>
           {`${site.address.line2} · thefoodfoundry.com`}

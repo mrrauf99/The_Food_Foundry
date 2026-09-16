@@ -1,7 +1,6 @@
 import type { SVGProps } from "react";
 
-// lucide-react no longer ships trademarked brand glyphs, so these four
-// social icons are minimal inline SVGs (standard, widely-used mark shapes).
+// lucide-react dropped brand glyphs, so these are inline SVGs.
 function IconBase(props: SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden focusable="false" {...props} />

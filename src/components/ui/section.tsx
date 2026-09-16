@@ -14,11 +14,19 @@ export function Section({
   );
 }
 
+// Text colors per background, all AA. "accent" is for the gold and teal bands.
+const headingTones = {
+  light: { eyebrow: "text-teal-700", description: "text-ink-700" },
+  dark: { eyebrow: "text-teal-300", description: "text-cream-100/75" },
+  accent: { eyebrow: "text-ink-950", description: "text-ink-950" },
+} as const;
+
 export function SectionHeading({
   eyebrow,
   title,
   description,
   align = "left",
+  tone = "light",
   as: Heading = "h2",
   className,
 }: {
@@ -26,9 +34,11 @@ export function SectionHeading({
   title: React.ReactNode;
   description?: React.ReactNode;
   align?: "left" | "center";
+  tone?: keyof typeof headingTones;
   as?: "h1" | "h2";
   className?: string;
 }) {
+  const colors = headingTones[tone];
   return (
     <div
       className={cn(
@@ -38,7 +48,7 @@ export function SectionHeading({
       )}
     >
       {eyebrow ? (
-        <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-teal-600">
+        <p className={cn("mb-3 text-sm font-semibold uppercase tracking-widest", colors.eyebrow)}>
           {eyebrow}
         </p>
       ) : null}
@@ -46,7 +56,7 @@ export function SectionHeading({
         {title}
       </Heading>
       {description ? (
-        <p className="mt-4 text-lg leading-relaxed text-ink-700">{description}</p>
+        <p className={cn("mt-4 text-lg leading-relaxed", colors.description)}>{description}</p>
       ) : null}
     </div>
   );
