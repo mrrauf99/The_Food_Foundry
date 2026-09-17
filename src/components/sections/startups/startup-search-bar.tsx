@@ -14,9 +14,9 @@ export function StartupSearchBar() {
         type="search"
         value={q}
         onChange={(e) => setQ(e.target.value || null, { throttleMs: 300 })}
-        placeholder="Search startups by name or description…"
+        placeholder="Search by name or description…"
         aria-label="Search startups"
-        className="h-12 w-full rounded-full border border-ink-950/15 bg-white pr-11 pl-11 text-sm text-ink-950 placeholder:text-ink-500 transition-colors focus-visible:border-teal-500 focus-visible:outline-none"
+        className="h-12 w-full rounded-full border border-ink-950/15 bg-surface pr-11 pl-11 text-sm text-ink-950 placeholder:text-ink-500 transition-colors focus-visible:border-ink-950"
       />
       {q ? (
         <button

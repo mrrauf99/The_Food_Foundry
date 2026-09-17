@@ -12,7 +12,7 @@ import { buildMetadata } from "@/lib/seo/metadata";
 
 export const metadata: Metadata = buildMetadata({
   title: "Meet Our Startups",
-  description: `Explore ${startups.length}+ founders across 6 Food Foundry cohorts — restaurant tech, CPG, supply chain, sustainability, and data & insights companies reshaping food and foodservice.`,
+  description: `Explore ${startups.length}+ startups across 6 Food Foundry cohorts, from restaurant tech and CPG to supply chain, sustainability, and data & insights.`,
   path: "/startups",
 });
 
@@ -27,16 +27,16 @@ export default async function StartupsPage({
 
   return (
     <>
-      {/* Above-the-fold, like the home Hero — CSS stagger rather than Framer Motion
-          so there's no wait on hydration and nothing sits at opacity:0 if JS fails. */}
+      {/* CSS animation, not Framer Motion: above the fold, it shouldn't wait on hydration. */}
       <Section className="bg-teal-500 text-ink-950" containerClassName="text-center">
         <SectionHeading
           as="h1"
           align="center"
           eyebrow="Portfolio"
           title="Meet Our Startups"
-          description="Food Foundry is dedicated to amplifying impact by supporting and empowering founders to thrive in the dynamic landscape of the food and foodservice industry."
-          className="animate-fade-up mx-auto [&_h2]:text-ink-950 [&_p]:text-ink-950/80"
+          description="We back founders who are changing food and foodservice, and we help them grow their impact."
+          tone="accent"
+          className="animate-fade-up mx-auto"
         />
       </Section>
 
@@ -47,7 +47,7 @@ export default async function StartupsPage({
             <CohortTabs />
             <CategoryFilter />
           </div>
-          <p className="text-sm text-ink-500" role="status">
+          <p className="text-sm text-ink-700" role="status">
             {filtered.length} of {startups.length} startups
           </p>
         </div>
@@ -59,7 +59,7 @@ export default async function StartupsPage({
 
       <CtaBand
         title="Building something in food or foodservice?"
-        description="Apply to join the next Food Foundry cohort and put your company in front of our investor and mentor network."
+        description="Apply to the next Food Foundry cohort and get your company in front of our investors and mentors."
       />
     </>
   );

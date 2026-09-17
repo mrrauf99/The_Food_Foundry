@@ -33,8 +33,7 @@ export function StartupCard({
               <span
                 className={cn(
                   "relative block h-10 w-32",
-                  // Light-on-transparent artwork needs a dark plate to stay legible
-                  // on the cream card; on dark cards the whole logo is knocked out white.
+                  // Light logos need a dark plate on cream cards.
                   !dark && startup.logoNeedsDarkBg && "rounded-sm bg-ink-950 px-2 py-1",
                 )}
               >
@@ -70,11 +69,11 @@ export function StartupCard({
           <span
             className={cn(
               "inline-flex items-center gap-1 text-xs font-semibold",
-              dark ? "text-teal-300" : "text-teal-600",
+              dark ? "text-teal-300" : "text-teal-700",
             )}
           >
             Visit site
-            <ArrowUpRight className="size-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            <ArrowUpRight className="size-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 motion-reduce:group-hover:translate-0" />
           </span>
         ) : null}
       </div>
@@ -90,7 +89,7 @@ export function StartupCard({
       href={startup.websiteUrl}
       target="_blank"
       rel="noreferrer noopener"
-      className="block h-full rounded-lg focus-visible:outline-none"
+      className="block h-full rounded-lg"
       aria-label={`Visit ${startup.name}'s website (opens in a new tab)`}
     >
       {content}

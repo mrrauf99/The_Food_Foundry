@@ -13,7 +13,7 @@ export function StartupGrid({
   if (startups.length === 0) {
     return (
       <p className="py-16 text-center text-ink-700">
-        No startups match your search. Try a different keyword or filter.
+        No startups match that search. Try a different keyword or filter.
       </p>
     );
   }
