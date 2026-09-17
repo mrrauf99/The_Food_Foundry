@@ -1,6 +1,7 @@
 import { Network, GraduationCap, ListChecks } from "lucide-react";
 import { Section, SectionHeading } from "@/components/ui/section";
 import { StaggerGroup, StaggerItem } from "@/components/motion/stagger";
+import { alumniCountLabel } from "@/content/startups";
 
 const details = [
   {
@@ -9,7 +10,7 @@ const details = [
     title: "Network",
     items: [
       "Direct access to Relish Works, Gordon Food Service, and 1871",
-      "A growing alumni network of 30+ portfolio companies",
+      `An alumni network of ${alumniCountLabel} portfolio companies`,
       "Introductions to investors, VCs, and industry operators",
     ],
   },
@@ -18,8 +19,8 @@ const details = [
     icon: GraduationCap,
     title: "Curriculum",
     items: [
-      "1:1 mentorship from dedicated mentors and entrepreneurs-in-residence",
-      "Specialized programming built around foodservice realities",
+      "One-on-one mentorship from our mentors and entrepreneurs-in-residence",
+      "Specialized programming built around how foodservice works",
       "Access to exclusive industry events throughout the cohort",
     ],
   },
@@ -30,7 +31,7 @@ const details = [
     items: [
       "Early-stage founders with a working product or prototype",
       "Focused on food, foodservice, or restaurant technology",
-      "Ready to be hands-on in Chicago for key programming and Demo Day",
+      "Able to be in Chicago for key programming and Demo Day",
     ],
   },
 ];
@@ -43,7 +44,7 @@ export function ProgramDetails() {
         {details.map((detail) => {
           const Icon = detail.icon;
           return (
-            <StaggerItem key={detail.id} className="rounded-lg border border-ink-950/8 bg-white p-7 shadow-soft">
+            <StaggerItem key={detail.id} className="rounded-lg border border-ink-950/8 bg-surface p-7 shadow-soft">
               <Icon className="size-6 text-teal-600" aria-hidden />
               <h3 className="mt-3 font-display text-xl">{detail.title}</h3>
               <ul className="mt-3 space-y-2">

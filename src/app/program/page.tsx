@@ -13,7 +13,7 @@ import { buildMetadata } from "@/lib/seo/metadata";
 export const metadata: Metadata = buildMetadata({
   title: "Our Accelerator Program",
   description:
-    "Program overview, funding, mentorship, and the founder journey through Food Foundry's Chicago-based accelerator for food and foodservice startups.",
+    "How Food Foundry's Chicago accelerator works for food and foodservice startups: funding, mentorship, and the path from application to Demo Day.",
   path: "/program",
 });
 
@@ -29,7 +29,7 @@ export default function ProgramPage() {
       <FaqSection title="Questions about the program" items={programFaq} className="bg-cream-100" />
       <CtaBand
         title="Ready to bring your idea to the table?"
-        description="Tell us about your company and we'll follow up with details on the next cohort's application window."
+        description="Tell us about your company and we'll send details on the next cohort's application window."
       />
     </>
   );

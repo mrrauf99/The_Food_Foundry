@@ -5,8 +5,8 @@ import { CheckCircle2 } from "lucide-react";
 
 const terms = [
   "Cohort 6 (2024) founders received a $15K equity-free stipend.",
-  "Terms have evolved cohort to cohort — Cohort 5 (2023) startups received a $75K investment.",
-  "Every cohort gets direct, warm introductions to Food Foundry's investor and VC network.",
+  "Terms change from cohort to cohort. Cohort 5 (2023) startups received a $75K investment.",
+  "Every cohort gets warm, direct introductions to Food Foundry's investors and VCs.",
 ];
 
 export function FundingStructure() {
@@ -16,8 +16,8 @@ export function FundingStructure() {
         <Reveal>
           <SectionHeading
             eyebrow="Funding"
-            title="Capital that meets founders where they are"
-            description="Funding structure has evolved as the program has grown — ask us for the current cohort's specific terms when you apply."
+            title="Funding that fits where founders are"
+            description="The funding structure has changed as the program has grown. Ask us about the current cohort's terms when you apply."
           />
         </Reveal>
         <Reveal delay={0.1}>

@@ -47,6 +47,4 @@ export interface GalleryPhoto {
   width: number;
   height: number;
   caption: string;
-  /** YouTube video ID for the startup's official Demo Day pitch, if available. */
-  videoId?: string;
 }

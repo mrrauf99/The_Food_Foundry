@@ -9,7 +9,8 @@ export function FounderJourney() {
         align="center"
         eyebrow="Founder Journey"
         title="From application to alumni"
-        className="mx-auto mb-14 [&_p]:text-cream-100/70"
+        tone="dark"
+        className="mx-auto mb-14"
       />
 
       <StaggerGroup className="grid gap-8 md:grid-cols-5">
