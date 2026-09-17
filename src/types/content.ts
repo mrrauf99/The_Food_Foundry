@@ -27,7 +27,6 @@ export interface Partner {
 
 export interface Pillar {
   id: "funding" | "resources" | "community";
-  number: string;
   title: string;
   description: string;
   icon: LucideIcon;

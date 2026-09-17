@@ -11,29 +11,28 @@ export function JourneyTeaser() {
         <SectionHeading
           eyebrow="The Program"
           title="From application to Demo Day"
-          description="A guided path from your first application to pitching investors on stage."
+          description="From your first application to pitching investors on stage."
         />
-        <Button href="/program" variant="outline" className="shrink-0 border-ink-950/20">
+        <Button href="/program" variant="outline" className="shrink-0 self-start border-ink-950/20 md:self-auto">
           See the full program <ArrowRight className="size-4" />
         </Button>
       </div>
 
-      <StaggerGroup className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
-        {founderJourneySteps.map((step) => {
-          const Icon = step.icon;
-          return (
-            <StaggerItem
-              key={step.id}
-              className="rounded-lg border border-ink-950/8 bg-white p-6 shadow-soft"
-            >
-              <Icon className="size-6 text-teal-600" aria-hidden />
-              <p className="mt-4 text-xs font-semibold uppercase tracking-wide text-ink-500">
-                {String(step.order).padStart(2, "0")}
-              </p>
-              <h3 className="mt-1 font-display text-xl">{step.title}</h3>
-            </StaggerItem>
-          );
-        })}
+      <StaggerGroup className="mt-12 grid border-t-2 border-ink-950 lg:grid-cols-5 lg:gap-6">
+        {founderJourneySteps.map((step) => (
+          <StaggerItem
+            key={step.id}
+            className="flex items-baseline gap-5 border-b border-ink-950/10 py-4 lg:block lg:border-b-0 lg:pt-6 lg:pb-0"
+          >
+            <p className="w-8 shrink-0 font-display text-2xl text-teal-700 lg:w-auto lg:text-4xl">
+              {String(step.order).padStart(2, "0")}
+            </p>
+            <div className="lg:mt-3">
+              <h3 className="font-display text-xl leading-heading">{step.title}</h3>
+              <p className="mt-1 text-sm text-ink-700">{step.duration}</p>
+            </div>
+          </StaggerItem>
+        ))}
       </StaggerGroup>
     </Section>
   );

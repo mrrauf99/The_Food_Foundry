@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Hero } from "@/components/sections/home/hero";
-import { Mission } from "@/components/sections/home/mission";
+import { ValueChain } from "@/components/sections/home/value-chain";
 import { Pillars } from "@/components/sections/home/pillars";
 import { JourneyTeaser } from "@/components/sections/home/journey-teaser";
 import { StartupShowcase } from "@/components/sections/home/startup-showcase";
@@ -14,7 +14,7 @@ import { buildMetadata } from "@/lib/seo/metadata";
 export const metadata: Metadata = buildMetadata({
   title: "Food Foundry | Startup Accelerator for Food & Foodservice Founders",
   description:
-    "Food Foundry is a founder community and accelerator program for innovative businesses and visionary founders disrupting the food and foodservice industry.",
+    "Food Foundry is a founder community and accelerator program for the founders and startups changing how food and foodservice work.",
   path: "/",
 });
 
@@ -22,16 +22,16 @@ export default function HomePage() {
   return (
     <>
       <Hero />
-      <Mission />
+      <ValueChain />
       <Pillars />
       <JourneyTeaser />
       <StartupShowcase />
       <Partners />
-      <FaqSection title="Common questions" items={homeFaq} className="bg-cream-50" />
+      <FaqSection title="Before you apply" items={homeFaq} className="border-t border-ink-950/8 bg-cream-50" />
       <Newsletter />
       <CtaBand
-        title="Ready to build the future of food?"
-        description="Join a growing network of 30+ founders who've come through Food Foundry since 2018."
+        title="Ready to build what's next in food?"
+        description="Applications go through our team. Tell us about your company and we'll send the next cohort's dates, terms, and requirements."
       />
     </>
   );
