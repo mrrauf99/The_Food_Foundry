@@ -139,7 +139,7 @@ export function ContactForm({ intent = "contact" }: { intent?: "apply" | "contac
         <p role="alert" className="text-sm text-error">{state.message}</p>
       ) : null}
 
-      <Button type="submit" disabled={pending} variant="secondary" size="lg" className="-rotate-1">
+      <Button type="submit" disabled={pending} variant="secondary" size="lg">
         {pending ? "Sending…" : intent === "apply" ? "Send Application" : "Get In Touch"}
       </Button>
     </form>
