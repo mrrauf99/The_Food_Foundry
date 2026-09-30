@@ -91,7 +91,7 @@ export function Navbar() {
               aria-hidden
               className="pointer-events-none absolute -bottom-0.5 left-0 h-0.5 w-px origin-left bg-gold-400"
               initial={false}
-              animate={{ x: underline.x, scaleX: underline.width }}
+              animate={{ x: underline.x, scaleX: underline.width * 0.80 }}
               transition={reduced ? { duration: 0 } : { type: "spring", stiffness: 380, damping: 32 }}
             />
           ) : null}

@@ -42,4 +42,4 @@ npm run dev
 - `npm run dev` starts the development server
 - `npm run build` creates a production build
 - `npm start` serves the production build
-- `npm run lint` runs ESLint
+- `npm run lint` runs Oxlint

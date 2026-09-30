@@ -7,7 +7,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "oxlint"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.2.20",
@@ -27,8 +27,7 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "eslint": "^9",
-    "eslint-config-next": "16.2.12",
+    "oxlint": "^1",
     "playwright": "^1.62.1",
     "tailwindcss": "^4",
     "typescript": "^5"
